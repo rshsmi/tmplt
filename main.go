@@ -13,18 +13,18 @@ import (
 
 func main() {
 	var templatePath string
-	var variablesPath string
+	var valuesPath string
 	var outputPath string
 
 	// Define command-line flags
 	pflag.StringVarP(&templatePath, "template", "t", "", "Path to the template YAML file")
-	pflag.StringVarP(&variablesPath, "values", "v", "", "Path to the variables YAML file")
+	pflag.StringVarP(&valuesPath, "values", "v", "", "Path to the values YAML file")
 	pflag.StringVarP(&outputPath, "output", "o", "", "Path to the output file. If not provided, the output will be displayed in the terminal.")
 
 	// Parse command-line arguments
 	pflag.Parse()
 
-	if templatePath == "" || variablesPath == "" {
+	if templatePath == "" || valuesPath == "" {
 		fmt.Println("Usage: go run main.go --template=template.yaml --values=values.yaml [--output=output.yaml]")
 		os.Exit(1)
 	}
@@ -35,7 +35,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	variablesData, err := ioutil.ReadFile(variablesPath)
+	variablesData, err := ioutil.ReadFile(valuesPath)
 	if err != nil {
 		fmt.Printf("Error reading variables YAML file: %v\n", err)
 		os.Exit(1)
